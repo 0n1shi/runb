@@ -22,7 +22,7 @@ if ! [ $EUID -eq 0 ]; then
 fi
 echo "done."
 
-CONTAINER_DIR="$(pwd)/$1"
+CONTAINER_DIR="$PWD/$1"
 ROOT_FS="$CONTAINER_DIR/rootfs"
 
 echo -n ">> creating a directory for..."

@@ -1,5 +1,6 @@
 #!/bin/bash
 
 set -eu
+set -x
 
-echo $EUID
+chroot 
