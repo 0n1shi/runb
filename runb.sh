@@ -12,6 +12,7 @@ if [ $# -lt 1 ]; then
 fi
 CONTAINER_DIR=$1
 
+# make a new name space.
 unshare \
     --pid \
     --uts \
