@@ -13,6 +13,7 @@ fi
 # Initialization
 CONTAINER_DIR=$1
 ROOT_FS_DIR=$CONTAINER_DIR/rootfs
+OLD_ROOT_FS_DIR=$ROOT_FS_DIR/.old_rootfs
 
 # make file system
 mkdir -p $ROOT_FS_DIR/proc && mount -t proc -o noexec,nosuid,nodev proc $ROOT_FS_DIR/proc
@@ -40,4 +41,9 @@ ln -s /proc/self/fd/0 $ROOT_FS_DIR/dev/stdin
 ln -s /proc/self/fd/1 $ROOT_FS_DIR/dev/stdout
 ln -s /proc/self/fd/2 $ROOT_FS_DIR/dev/stderr
 
-chroot $ROOT_FS_DIR /bin/sh
+#chroot $ROOT_FS_DIR /bin/sh
+
+# change rootfs
+mkdir -p $OLD_ROOT_FS_DIR
+pivot_root $ROOT_FS_DIR $OLD_ROOT_FS_DIR
+u
