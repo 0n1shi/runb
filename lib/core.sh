@@ -46,4 +46,8 @@ ln -s /proc/self/fd/2 $ROOT_FS_DIR/dev/stderr
 # change rootfs
 mkdir -p $OLD_ROOT_FS_DIR
 pivot_root $ROOT_FS_DIR $OLD_ROOT_FS_DIR
-u
+cd /
+umount -l $OLD_ROOT_FS_DIR
+rmdir $OLD_ROOT_FS_DIR
+
+/bin/sh
