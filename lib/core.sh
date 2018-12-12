@@ -41,13 +41,5 @@ ln -s /proc/self/fd/0 $ROOT_FS_DIR/dev/stdin
 ln -s /proc/self/fd/1 $ROOT_FS_DIR/dev/stdout
 ln -s /proc/self/fd/2 $ROOT_FS_DIR/dev/stderr
 
-#chroot $ROOT_FS_DIR /bin/sh
-
-# change rootfs
-mkdir -p $OLD_ROOT_FS_DIR
-pivot_root $ROOT_FS_DIR $OLD_ROOT_FS_DIR
-cd /
-umount -l $OLD_ROOT_FS_DIR
-rmdir $OLD_ROOT_FS_DIR
-
-/bin/sh
+# change rootfs by chroot
+exec chroot $ROOT_FS_DIR /bin/sh
