@@ -11,8 +11,8 @@ perror_exit() {
 }
 
 echo -n ">> checking argments..."
-if [ $# -lt 1 ]; then
-    perror_exit "you need to designate container name"
+if [ $# -lt 2 ]; then
+    perror_exit "you need to designate container directory name and image name"
 fi
 echo "done."
 
@@ -23,6 +23,7 @@ fi
 echo "done."
 
 CONTAINER_DIR="$PWD/$1"
+IMAGE_NAME="$2"
 ROOT_FS="$CONTAINER_DIR/rootfs"
 
 echo -n ">> creating a directory for..."
@@ -38,7 +39,7 @@ fi
 echo "done."
 
 echo -n ">> creating container an image..."
-docker export $(docker create busybox) | tar -C $ROOT_FS -xvf - > /dev/null
+docker export $(docker create $IMAGE_NAME) | tar -C $ROOT_FS -xvf - > /dev/null
 echo "done."
 
 echo ">> file system is successfully created."
