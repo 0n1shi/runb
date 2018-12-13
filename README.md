@@ -1,5 +1,3 @@
 # About
 
-This is a OCI-layer container runtime.
-
-# 
+This is a OCI-layer container runtime for study.
