@@ -5,13 +5,15 @@
 set -eu
 set -x
 
-if [ $# -lt 1 ]; then
+if [ $# -lt 2 ]; then
     echo "you need to designate a directory which has a root file system."
     exit 1
 fi
 
 # Initialization
 CONTAINER_DIR=$1
+CONTAINER_NAME=$2
+CONTAINER_NET_NS="$CONTAINER_NAME-ns"
 ROOT_FS_DIR=$CONTAINER_DIR/rootfs
 OLD_ROOT_FS_DIR=$ROOT_FS_DIR/.old_rootfs
 
@@ -42,4 +44,4 @@ ln -s /proc/self/fd/1 $ROOT_FS_DIR/dev/stdout
 ln -s /proc/self/fd/2 $ROOT_FS_DIR/dev/stderr
 
 # change rootfs by chroot
-exec chroot $ROOT_FS_DIR /bin/sh
+ip netns exec $CONTAINER_NET_NS exec chroot $ROOT_FS_DIR /bin/sh
