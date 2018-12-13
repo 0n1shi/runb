@@ -23,7 +23,6 @@ unshare \
     --pid \
     --uts \
     --ipc \
-    --net \
     --mount \
     --cgroup \
     --fork \

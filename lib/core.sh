@@ -44,4 +44,4 @@ ln -s /proc/self/fd/1 $ROOT_FS_DIR/dev/stdout
 ln -s /proc/self/fd/2 $ROOT_FS_DIR/dev/stderr
 
 # change rootfs by chroot
-ip netns exec $CONTAINER_NET_NS exec chroot $ROOT_FS_DIR /bin/sh
+exec ip netns exec $CONTAINER_NET_NS chroot $ROOT_FS_DIR /bin/bash
