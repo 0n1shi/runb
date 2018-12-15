@@ -20,8 +20,12 @@ VETH="veth-$CONTAINER_NAME"
 ETH="eth-$CONTAINER_NAME"
 
 # create veth
-ip link add name $VETH type veth peer name $ETH
+#ip link add name $VETH type veth peer name $ETH
+
+# create macvlan
+ip link add link enp0s3 name $VETH type macvlan mode bridge
 ip link set $VETH netns $CONTAINER_NET_NS
+ip netns exec $CONTAINER_NET_NS dhclient $VETH
 
 trap "ip netns del $CONTAINER_NET_NS" EXIT
 
