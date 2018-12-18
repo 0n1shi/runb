@@ -12,6 +12,7 @@ if [ $# -lt 2 ]; then
 fi
 CONTAINER_DIR="$1/$2"
 CONTAINER_NAME=$2
+CONTAINER_FS="$CONTAINER_DIR/rootfs"
 CONTAINER_NET_NS="$CONTAINER_NAME-ns"
 
 # create network namespace
@@ -19,14 +20,19 @@ ip netns add $CONTAINER_NET_NS
 VETH="veth-$CONTAINER_NAME"
 ETH="eth-$CONTAINER_NAME"
 
-# create veth
-#ip link add name $VETH type veth peer name $ETH
+# settings
+echo "nameserver 8.8.8.8" > $CONTAINER_FS/etc/resolv.conf
 
-# create macvlan
-ip link add link enp0s3 name $VETH type macvlan mode bridge
-ip link set $VETH netns $CONTAINER_NET_NS
-ip netns exec $CONTAINER_NET_NS dhclient $VETH
+# network
+ip link add name $VETH type veth peer name $ETH
+brctl addif docker0 $VETH
+ip link set $VETH up
+ip link set $ETH netns $CONTAINER_NET_NS
+ip netns exec $CONTAINER_NET_NS ip address add 172.17.0.100/16 dev $ETH
+ip netns exec $CONTAINER_NET_NS ip link set $ETH up
+ip netns exec $CONTAINER_NET_NS ip route add default via 172.17.0.1
 
+# clean up :)
 trap "ip netns del $CONTAINER_NET_NS" EXIT
 
 # make a new name space.
