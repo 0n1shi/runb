@@ -13,9 +13,14 @@ fi
 # Initialization
 CONTAINER_DIR=$1
 CONTAINER_NAME=$2
+#CGROUP_CONTROLLERS="blkio,cpu,cpuset,devices,freezer,memory,pids"
+CGROUP_CONTROLLERS="cpu,memory,pids"
 CONTAINER_NET_NS="$CONTAINER_NAME-ns"
 ROOT_FS_DIR=$CONTAINER_DIR/rootfs
 OLD_ROOT_FS_DIR=$ROOT_FS_DIR/.old_rootfs
+
+# cgroup
+cgclassify -g "$CGROUP_CONTROLLERS:$CONTAINER_NAME" $$
 
 # make file system
 mkdir -p $ROOT_FS_DIR/proc && mount -t proc -o noexec,nosuid,nodev proc $ROOT_FS_DIR/proc

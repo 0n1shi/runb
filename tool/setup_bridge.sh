@@ -16,5 +16,3 @@ ip link set $BRIDGE_NAME up
 iptables --table nat --flush
 iptables --table nat --append POSTROUTING --source 10.0.0.0/24 --jump MASQUERADE
 echo 1 > /proc/sys/net/ipv4/ip_forward
-
-
