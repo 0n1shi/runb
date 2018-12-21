@@ -24,7 +24,6 @@ ETH="eth-$CONTAINER_NAME"
 echo "nameserver 8.8.8.8" > $CONTAINER_FS/etc/resolv.conf
 
 # cgroups
-#CGROUP_CONTROLLERS="blkio,cpu,cpuset,devices,freezer,memory,pids"
 CGROUP_CONTROLLERS="cpu,memory,pids"
 cgcreate -g "$CGROUP_CONTROLLERS:$CONTAINER_NAME"
 

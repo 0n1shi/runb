@@ -13,7 +13,6 @@ fi
 # Initialization
 CONTAINER_DIR=$1
 CONTAINER_NAME=$2
-#CGROUP_CONTROLLERS="blkio,cpu,cpuset,devices,freezer,memory,pids"
 CGROUP_CONTROLLERS="cpu,memory,pids"
 CONTAINER_NET_NS="$CONTAINER_NAME-ns"
 ROOT_FS_DIR=$CONTAINER_DIR/rootfs
