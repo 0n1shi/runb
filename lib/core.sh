@@ -17,6 +17,8 @@ CGROUP_CONTROLLERS="cpu,memory,pids"
 CONTAINER_NET_NS="$CONTAINER_NAME-ns"
 ROOT_FS_DIR=$CONTAINER_DIR/rootfs
 OLD_ROOT_FS_DIR=$ROOT_FS_DIR/.old_rootfs
+SET_CAPS="cap_net_raw,cap_net_bind_service,cap_audit_read,cap_audit_write,cap_dac_override,cap_setfcap,cap_setpcap,cap_setgid,cap_setuid,cap_mknod,cap_chown,cap_fowner,cap_fsetidcap_kill,cap_sys_chroot"
+DROP_CAPS="cap_net_broadcast,cap_sys_module,cap_sys_rawio,cap_sys_pacct,cap_sys_admin,cap_sys_nice,cap_sys_resource,cap_sys_time,cap_sys_tty_config,cap_audit_control,cap_mac_override,cap_mac_admin,cap_net_admin,cap_syslog,cap_dac_read_search,cap_linux_immutable,cap_ipc_lock,cap_ipc_owner,cap_sys_ptrace,cap_sys_boot,cap_lease,cap_wake_alarm,cap_block_suspend"
 
 # cgroup
 cgclassify -g "$CGROUP_CONTROLLERS:$CONTAINER_NAME" $$
@@ -48,4 +50,4 @@ ln -s /proc/self/fd/1 $ROOT_FS_DIR/dev/stdout
 ln -s /proc/self/fd/2 $ROOT_FS_DIR/dev/stderr
 
 # change rootfs by chroot
-exec ip netns exec $CONTAINER_NET_NS chroot $ROOT_FS_DIR /bin/bash
+exec capsh --inh=$SET_CAPS --drop=$DROP_CAPS -- -c "ip netns exec $CONTAINER_NET_NS chroot $ROOT_FS_DIR /bin/bash"
