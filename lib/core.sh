@@ -1,5 +1,4 @@
 #!/bin/bash
-
 # https://github.com/opencontainers/runc/blob/master/libcontainer/SPEC.md
 
 set -eu
@@ -51,7 +50,4 @@ ln -s /proc/self/fd/1 $ROOT_FS_DIR/dev/stdout
 ln -s /proc/self/fd/2 $ROOT_FS_DIR/dev/stderr
 
 # change rootfs by chroot
-#exec ip netns exec $CONTAINER_NET_NS chroot $ROOT_FS_DIR /bin/bash
-#exec capsh --inh="$SET_CAPS" --drop="$DROP_CAPS" --uid="$UID" --guid="$GUID" --chroot=$ROOT_FS_DIR -- -c "ip netns exec $CONTAINER_NET_NS /bin/bash"
-#exec ip netns exec $CONTAINER_NET_NS capsh --drop="$DROP_CAPS" --uid="$UID" --gid="$GUID" --chroot="$ROOT_FS_DIR" -- -c "/bin/bash"
 exec ip netns exec $CONTAINER_NET_NS capsh --inh="$SET_CAPS" --drop="$DROP_CAPS" --uid="$UID" --gid="$GUID" --chroot="$ROOT_FS_DIR" -- -c "/bin/bash"
