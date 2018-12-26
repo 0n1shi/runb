@@ -1,7 +1,7 @@
 #!/bin/bash
 
 set -eu
-set -x
+#set -x
 
 CORE=$PWD/lib/core.sh
 

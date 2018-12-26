@@ -2,7 +2,7 @@
 # https://github.com/opencontainers/runc/blob/master/libcontainer/SPEC.md
 
 set -eu
-set -x
+#set -x
 
 if [ $# -lt 2 ]; then
     echo "you need to designate a directory which has a root file system."

@@ -6,7 +6,7 @@ set -eu
 # return: 
 # arg 1: message
 perror_exit() {
-    echo -e "\n$1" >&2
+    echo -e "\n$1\n" >&2
     exit 1
 }
 
