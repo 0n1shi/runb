@@ -5,6 +5,8 @@ This is a OCI-layer container runtime for studying.
 # Install
 
 ```bash
+sudo apt install docker.io
+sudo apt install cgroup-tools
 git clone https://github.com/k-onishi/runb/
 cd runb
 ```
