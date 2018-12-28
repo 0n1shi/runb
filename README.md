@@ -19,3 +19,17 @@ sudo bash tool/setup_filesystem.sh containers/ ubuntu
 sudo bash tools/setup_bridge.sh
 sudo bash runb.sh containers/ubuntu/
 ```
+
+# Tools
+
+- make file system for container
+
+```bash
+bash tool/setup_filesystem.sh [containers dir] [distro name]
+```
+
+- make network bridge
+
+```bash
+bash tool/setup_bridge.sh
+```
