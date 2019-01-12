@@ -16,7 +16,7 @@ cd runb
 ```bash
 mkdir containers
 sudo bash tool/setup_filesystem.sh containers/ ubuntu
-sudo bash tools/setup_bridge.sh
+sudo bash tool/setup_bridge.sh
 sudo bash runb.sh containers/ubuntu/
 ```
 
