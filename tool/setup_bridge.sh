@@ -18,10 +18,8 @@ echo "done."
 echo -n ">> setting up nat table ... "
 iptables --table nat --flush
 iptables --table nat --append POSTROUTING --source 10.0.0.0/24 --jump MASQUERADE
-iptables -A FORWARD -o runb-bridge -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
-iptables -A FORWARD -o runb-bridge -j DOCKER 
-iptables -A FORWARD -i runb-bridge ! -o runb-bridge -j ACCEPT
-iptables -A FORWARD -i runb-bridge -o runb-bridge -j ACCEPT
+iptables --append FORWARD --out-interface runb-bridge --match conntrack --ctstate RELATED,ESTABLISHED --jump ACCEPT
+iptables --append FORWARD --in-interface runb-bridge --out-interface runb-bridge --jump ACCEPT
 echo 1 > /proc/sys/net/ipv4/ip_forward
 echo "done."
 
