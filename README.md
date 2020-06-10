@@ -1,6 +1,6 @@
 # About
 
-This is a OCI-layer container runtime for studying.
+This is a OCI-layer container runtime written in Shell.
 
 # Install
 
@@ -11,7 +11,7 @@ git clone https://github.com/k-onishi/runb/
 cd runb
 ```
 
-# Run
+# Quickstart
 
 ```bash
 mkdir containers
