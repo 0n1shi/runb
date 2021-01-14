@@ -1,8 +1,8 @@
-# About
+# Runb
 
-This is a OCI-layer container runtime written in Shell.
+An OCI-layer container runtime written in Shell script.
 
-# Install
+## Install
 
 ```bash
 sudo apt install docker.io
@@ -11,7 +11,7 @@ git clone https://github.com/k-onishi/runb/
 cd runb
 ```
 
-# Quickstart
+## Quickstart
 
 ```bash
 mkdir containers
@@ -20,9 +20,9 @@ sudo bash tool/setup_bridge.sh
 sudo bash runb.sh containers/ubuntu/
 ```
 
-# Tools
+## Tools
 
-- make file system for container
+- make root filesystem for container
 
 ```bash
 bash tool/setup_filesystem.sh [containers dir] [distro name]
