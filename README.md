@@ -1,4 +1,4 @@
-# Runb
+# RunB
 
 An OCI-layer container runtime written in Shell script.
 
